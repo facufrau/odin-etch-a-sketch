@@ -22,11 +22,11 @@ function fillCell(e){
     }
 }
 const gridContainer = document.getElementById("grid");
-const GRID_SIZE = Number(prompt("Enter grid size >= 16 and <= 100:"));
-if (GRID_SIZE <= 100 && GRID_SIZE >= 16){
-    createGrid(GRID_SIZE);
-    const cells = document.querySelectorAll(".cell");
-    cells.forEach(cell => cell.addEventListener("mouseenter", fillCell))
+let gridSize = Number(prompt("Enter grid size >= 16 and <= 100:"));
+if (gridSize >= 100 || gridSize <= 16 ){
+    gridSize = 16;
 }
 
-
+createGrid(gridSize);
+const cells = document.querySelectorAll(".cell");
+cells.forEach(cell => cell.addEventListener("mouseenter", fillCell))
