@@ -1,0 +1,20 @@
+body {
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#grid {
+    display: grid;
+    box-sizing: border-box;
+    outline: 2px solid black;
+    height: 70vh;
+    width: 70vh;
+}
+
+.cell {
+    box-sizing: border-box;
+    outline: 1px solid #c9c9c9;
+}
