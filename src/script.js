@@ -1,3 +1,7 @@
+function addListenersToCells(){
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.addEventListener("mouseenter", fillCell))
+}
 
 function createGrid(size){
     gridContainer.style["grid-template-columns"] = `repeat(${size}, 1fr)`;
@@ -9,6 +13,7 @@ function createGrid(size){
           gridContainer.appendChild(newDiv);
           }  
     }
+    addListenersToCells();
 }
 
 function generateRandomColor(){
@@ -21,12 +26,31 @@ function fillCell(e){
        e.target.style.backgroundColor = generateRandomColor(); 
     }
 }
-const gridContainer = document.getElementById("grid");
-let gridSize = Number(prompt("Enter grid size >= 16 and <= 100:"));
-if (gridSize >= 100 || gridSize <= 16 ){
-    gridSize = 16;
+
+function clearGrid(){
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach(cell => cell.style.backgroundColor = "");
 }
 
-createGrid(gridSize);
-const cells = document.querySelectorAll(".cell");
-cells.forEach(cell => cell.addEventListener("mouseenter", fillCell))
+function resizeGrid(){
+    const newSize = prompt("Enter grid size >= 16 and <= 100:");
+    const gridContainer = document.getElementById("grid");
+    clearGrid();
+    while (gridContainer.hasChildElements){
+        gridContainer.removeChild(gridContainer.lastChild)
+    }
+    if (newSize >= 16 && newSize <= 100){
+        createGrid(newSize);
+    }
+}
+
+const gridContainer = document.getElementById("grid");
+const STARTING_GRID_SIZE = 16;
+
+createGrid(STARTING_GRID_SIZE);
+
+const clearButton = document.getElementById("clear");
+const sizeButton = document.getElementById("size");
+
+sizeButton.onclick = resizeGrid;
+clearButton.onclick = clearGrid;
